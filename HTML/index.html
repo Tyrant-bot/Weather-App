@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <main>
+        <section id="searchBar" class="searchBar">
+            <form id="searchBar__Form" class="searchBar__Form" role="search">
+                <label for="searchBar__Text">Enter your Location</label>
+                <input type="text" id="searchBar__Text" class="searchBar__Text" placeholder="City, Area, Pin Code" role="searchbox" size="20">
+                <button id="searchBar__Button" class="searchBar__Button" role="search" title="Submit" aria-label="search your city or area or pin code">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </form>
+        </section>
+        <a href="#currentWeather" class="skip-link">Skip to current Weather</a>
+        <section id="currentWeather" class="currentWeather" role="Today's Weather" aria-labelledby="currentWeatherLocation">
+            <h2 class="currentLocation">Current Weather conditions</h2>
+            <div id="currentWeather__Conditions" class="currentWeather__Conditions"></div>
+        </section>
+        <a href="#dailyWeather" class="skip-link">Skip to daily weather</a>
+        <nav id="navButtons" id="navButtons" class="navButtons">
+            <button id="location" class="button" title="Get Location" aria-label="get current weather conditions for current your loaction">
+                <i class="fa-solid fa-location-crosshairs"></i>
+            </button>
+            <button id="home" class="button" title="Home Weather" aria-label="Get the current Weather conditions for home location">
+                <i class="fa-solid fa-house-chimney"></i>
+            </button>
+            <button id="saveLocation" class="button" title="Save Location" aria-label="Save your current location as home">
+                <i class="fa-solid fa-floppy-disk"></i>
+            </button>
+            <button id="changeUnits" class="button" title="Change Units" aria-label="toggle unit between Farenheit and celcius">
+                <i class="fa-solid fa-arrow-right-arrow-left"></i>
+            </button>
+            <button id="refresh" class="button" title="Refresh" aria-label="Refresh the current weather condition">
+                <i class="fa-solid fa-rotate-right"></i>
+            </button>
+        </nav>
+        <section id="dailyWeather" class="dailyWeather" role="region" aria-labelledby="dailyWeatherConditios">
+            <h2 id="dailyWeatherCondition" class="dailyWeatherCondition">Daily Weather condition</h2>
+            <div id="dailyWeather__Condition" class="dailyWeather__Condition"></div>
+        </section>
+    </main>
+</body>
+</html>
