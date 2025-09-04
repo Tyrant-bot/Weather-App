@@ -1,6 +1,6 @@
 import location from "./location.js";
-import { displayErr } from "./DOM.js";
-import { setLocationObj, getHomeLocation } from "./data.js";
+import { displayErr, displayApiErr } from "./DOM.js";
+import { setLocationObj, getHomeLocation, getApiCoords, getWeatherFromCoords, cleanText} from "./data.js";
 
 const currLoc = new location();
 
@@ -15,6 +15,8 @@ const initApp = () => {
     changeUnitButton.addEventListener("click", toggleUnit);
     const refreshButton = document.getElementById("refresh");
     refreshButton.addEventListener("click", refreshWeather);
+    const search = document.getElementById("searchBar__Form");
+    search.addEventListener("submit", submitLocation);
 }
 
 
@@ -89,8 +91,39 @@ const refreshWeather = () => {
     updateDisplayWeather(currLoc);
 }
 
+const submitLocation = async (event) => {
+    event.preventDefault();
+    const text = document.getElementById("searchBar__Text").value;
+    const entryText = cleanText(text);
+    if(entryText.length === 0){
+        return;
+    }
+    const coordsData = await getApiCoords(entryText, currLoc.getUnit());
+    if(coordsData){
+        if(coordsData.cod === 200){
+            const myCoordsDataObj = {
+                lat : coordsData.coord.lat,
+                long : coordsData.coord.lon,
+                name : coordsData.name ?`${coords,name}, ${coordsData.sys.country}` :  coordsData.name
+            };
+            setLocationObj(currLoc, myCoordsDataObj);
+            updateDisplayWeather(currLoc);
+        }
+        else{
+            displayApiErr(coordsData.message);
+        }
+    }
+    else{
+        displayErr("Connection Error");
+    }
+}
+
 const updateDisplayWeather = async (locationObj) => {
-    console.log(locationObj);
+    const weatherJSON = await getWeatherFromCoords(locationObj);
+    console.log(weatherJSON);
+    // if(weatherJSON){
+    //     updateDisplay(weatherJSON);
+    // }
 }
 
 document.addEventListener("DOMContentLoaded", initApp);
