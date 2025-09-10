@@ -6,7 +6,7 @@
 
 html {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../HTML/cloudy.jpg);
+  background-image: url(../HTML/cloud.jpg);
   background-size: cover;
   background-blend-mode: overlay;
   font-size: 16px;
@@ -353,22 +353,22 @@ main {
   align-items: center;
 }
 
-.sunny {
+.sun {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/sunny.jpg);
+  background-image: url(../../HTML/sun.jpg);
 }
 
-.rainy {
+.rain {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/rainy.jpg);
+  background-image: url(../../HTML/rain.jpg);
 }
 
-.cloudy {
+.cloud {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/cloudy.jpg);
+  background-image: url(../../HTML/cloud.jpg);
 }
 
-.snowy {
+.snow {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/snowy.jpg);
+  background-image: url(../../HTML/snow.jpg);
 }/*# sourceMappingURL=main.css.map */

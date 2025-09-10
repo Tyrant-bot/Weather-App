@@ -21,6 +21,7 @@ export const getApiCoords = async (text, unit) => {
     try{
         const dataStream = await fetch(encodedUrl);
         const dataJSON = dataStream.json();
+        return dataJSON;
     }
     catch (err) {
         console.error(err.stack);
@@ -31,7 +32,7 @@ export const getWeatherFromCoords = async (locationObj) => {
     const lat = locationObj.getLat();
     const long = locationObj.getLong();
     const unit = locationObj.getUnit();
-    const url = `api.openweathermap.org/data/2.5/forecast/daily/climate?lat=${lat}&lon=${long}&cnt={6}&units=${unit}&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${API_KEY}`;
     const encodedUrl = encodeURI(url);
     try{
         const weatherStream = await fetch(encodedUrl);

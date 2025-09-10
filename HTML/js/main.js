@@ -1,5 +1,5 @@
 import location from "./location.js";
-import { displayErr, displayApiErr } from "./DOM.js";
+import { displayErr, displayApiErr, updateDisplay} from "./DOM.js";
 import { setLocationObj, getHomeLocation, getApiCoords, getWeatherFromCoords, cleanText} from "./data.js";
 
 const currLoc = new location();
@@ -38,7 +38,7 @@ const geoSuccess = (position) => {
     const myCoords = {
         lat : position.coords.latitude,
         long : position.coords.longitude,
-        name: `Lat : ${position.coords.latitude} Long : ${position.coords.longitude}`
+        name: `Lat : ${position.coords.latitude}  Lon : ${position.coords.longitude}`
     };
     setLocationObj(currLoc, myCoords);
     updateDisplayWeather(currLoc);
@@ -120,10 +120,9 @@ const submitLocation = async (event) => {
 
 const updateDisplayWeather = async (locationObj) => {
     const weatherJSON = await getWeatherFromCoords(locationObj);
-    console.log(weatherJSON);
-    // if(weatherJSON){
-    //     updateDisplay(weatherJSON);
-    // }
-}
+    if(weatherJSON){
+        updateDisplay(weatherJSON, locationObj);
+    }
+};
 
 document.addEventListener("DOMContentLoaded", initApp);
