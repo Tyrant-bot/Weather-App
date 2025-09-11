@@ -1,12 +1,12 @@
 const API_KEY = "8b95573c22cbe430aa1507a18bfbef84";
 
 export const setLocationObj = (currLoc, myCoords) => {
-
-    currLoc.setName(myCoords.name);
-    currLoc.setLat(myCoords.lat);
-    currLoc.setLong(myCoords.long);
-    if(myCoords.unit){
-        currLoc.setUnit(myCoords.unit);
+    const { lat, long, name, unit } = myCoords;
+    currLoc.setName(name);
+    currLoc.setLat(lat);
+    currLoc.setLong(long);
+    if(unit){
+        currLoc.setUnit(unit);
     }
 }
 
@@ -32,7 +32,7 @@ export const getWeatherFromCoords = async (locationObj) => {
     const lat = locationObj.getLat();
     const long = locationObj.getLong();
     const unit = locationObj.getUnit();
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=${unit}&appid=${API_KEY}`;
     const encodedUrl = encodeURI(url);
     try{
         const weatherStream = await fetch(encodedUrl);

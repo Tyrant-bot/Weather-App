@@ -1,6 +1,6 @@
 import location from "./location.js";
-import { displayErr, displayApiErr, updateDisplay} from "./DOM.js";
-import { setLocationObj, getHomeLocation, getApiCoords, getWeatherFromCoords, cleanText} from "./data.js";
+import { displayErr, displayApiErr, updateDisplay } from "./DOM.js";
+import { setLocationObj, getHomeLocation, getApiCoords, getWeatherFromCoords, cleanText } from "./data.js";
 
 const currLoc = new location();
 
@@ -18,9 +18,6 @@ const initApp = () => {
     const search = document.getElementById("searchBar__Form");
     search.addEventListener("submit", submitLocation);
 }
-
-
-
 
 const getGeoWeather = (event) => {
     if(!navigator.geolocation) {
@@ -52,7 +49,7 @@ const getHomeWeather = (event) => {
     if(!homeLocation && event.type === "click"){
         displayErr("No Saved Location Found!");
     }
-    else if(homeLocation && !event){
+    else{
         displayHomeLocation(homeLocation);
     }
 }

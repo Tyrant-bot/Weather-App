@@ -30,6 +30,9 @@ export default class location{
     getUnit(){
         return this._unit;
     }
+    setUnit(unit){
+        this.__unit = unit;
+    }
     toggleUnit(){
         this._unit = this._unit === "metric" ? "imperial" :"metric";
     }
