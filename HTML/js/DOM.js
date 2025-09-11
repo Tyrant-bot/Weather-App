@@ -9,8 +9,8 @@ export const displayApiErr = (message) => {
 }
 const toProperCase = (text) => {
     const words = text.split(" ");
-    const properWords = words.map(word => {
-        word.charAt(0).toUpperCase() + word.slice(1)
+    const properWords = words.map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1)
     });
     return properWords.join(" ");
 }
@@ -57,7 +57,7 @@ const getWeatherClass = (weatherJSON) => {
         weatherClass = weatherLookUp[firstTwoChars];
     }
     else if(lastChar === "d"){
-        weatherClass = "cloud";
+        weatherClass = "sun";
     }
     else{
         weatherClass = "night";
@@ -82,8 +82,8 @@ const createCurrentConditionsDiv = (weatherObj, unit) => {
     const properDesc = toProperCase(weatherObj.weather[0].description);
     const desc = createElem("div", "desc", properDesc);
     const realFeel = createElem("div", "feel", `Real Feel ${Math.round(Number(weatherObj.main.feels_like))}°`);
-    const maxTemp = createElem("div", "maxTemp", `Highest ${Math.round(Number(weatherObj.main.temp_max))}°`);
-    const minTemp = createElem("div", "minTemp", `Lowest ${Math.round(Number(weatherObj.main.temp_min))}°`);
+    const maxTemp = createElem("div", "maxTemp", `Highest ${Math.round(Number(weatherObj.main.temp_max))}°<i class="fa-solid fa-temperature-high" style="color: rgba(255, 0, 0, 0.6)"></i>`);
+    const minTemp = createElem("div", "minTemp", `Lowest ${Math.round(Number(weatherObj.main.temp_min))}°<i class="fa-solid fa-temperature-low" style="color: rgba(0, 0, 139, 0.6)"></i>`);
     const humidity = createElem("div", "humidity", `Humidity ${Math.round(Number(weatherObj.main.humidity))}%`);
     const windSpeed = createElem("div", "wind", `wind ${Math.round(Number(weatherObj.wind.speed))} ${windUnit}`);
     return [icon, temp, desc, realFeel, maxTemp, minTemp, humidity, windSpeed];
@@ -103,7 +103,12 @@ const createElem = (elemType, className, text, unit) => {
     const div = document.createElement(elemType);
     div.className = className;
     if(text){
-        div.textContent = text;
+        if(className === "maxTemp" || className === "minTemp"){
+            div.innerHTML = text;
+        }
+        else{
+            div.textContent = text;
+        }
     }
     if(className === "temp"){
         const UnitDiv = document.createElement("div");

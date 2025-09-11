@@ -38,7 +38,7 @@ const geoSuccess = (position) => {
     const myCoords = {
         lat : position.coords.latitude,
         long : position.coords.longitude,
-        name: `Lat : ${position.coords.latitude}  Lon : ${position.coords.longitude}`
+        name: `Lat : ${(position.coords.latitude).toFixed(2)} • Lon : ${(position.coords.longitude).toFixed(2)}`
     };
     setLocationObj(currLoc, myCoords);
     updateDisplayWeather(currLoc);
@@ -104,7 +104,7 @@ const submitLocation = async (event) => {
             const myCoordsDataObj = {
                 lat : coordsData.coord.lat,
                 long : coordsData.coord.lon,
-                name : coordsData.name ?`${coords,name}, ${coordsData.sys.country}` :  coordsData.name
+                name : coordsData.sys.country ?`${coordsData.name}, ${coordsData.sys.country}` :  coordsData.name
             };
             setLocationObj(currLoc, myCoordsDataObj);
             updateDisplayWeather(currLoc);

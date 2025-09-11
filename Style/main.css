@@ -6,7 +6,7 @@
 
 html {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../HTML/cloud.jpg);
+  background-image: url(../HTML/sun.jpg);
   background-size: cover;
   background-blend-mode: overlay;
   font-size: 16px;
@@ -168,7 +168,7 @@ main {
 }
 
 .currentWeather #currentLocation {
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: normal;
   text-align: center;
   margin-bottom: 1rem;
@@ -371,4 +371,9 @@ main {
 .snow {
   background-color: rgba(0, 0, 255, 0.5);
   background-image: url(../../HTML/snow.jpg);
+}
+
+.night {
+  background-color: rgba(0, 0, 255, 0.5);
+  background-image: url(../../HTML/night.jpg);
 }/*# sourceMappingURL=main.css.map */
