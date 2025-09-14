@@ -20,13 +20,14 @@ const updateWeatherHeader = (msg) => {
     h2.textContent = msg;
 }
 
-export const updateDisplay = (weatherJSON, locationObj) => {
+export const updateDisplay = (weatherJSON, sixDayWeatherJSON, locationObj) => {
     clearDisplay();
     const weatherClass = getWeatherClass(weatherJSON);
     setBGImg(weatherClass);
     updateWeatherHeader(locationObj.getName());
     const currentConditionsArray = createCurrentConditionsDiv(weatherJSON, locationObj.getUnit());
     displayCurrentConditions(currentConditionsArray);
+    displaySixDayForecast(sixDayWeatherJSON);
 }
 
 const clearDisplay = () => {
@@ -177,4 +178,33 @@ const displayCurrentConditions = (currentConditionsArray) => {
     currentConditionsArray.forEach(currentConditions => {
         currentConditionsContainer.appendChild(currentConditions);
     });
+};
+
+const displaySixDayForecast = (weatherJson) => {
+    for (let i = 0; i < 6; i++) {
+        const dfArray = createDailyForecastDivs(weatherJson.daily.time[i+1], weatherJson.daily.temperature_2m_max[i+1], weatherJson.daily.temperature_2m_min[i+1], weatherJson.daily.weather_code[i+1]);
+        displayDailyForecast(dfArray);
+    }
+};
+
+const createDailyForecastDivs = (date, max, min, code) => {
+    const dayAbbreviationText = getDayAbbreviation(date);
+    const dayAbbreviation = createElem("p", "dayAbbreaviation", dayAbbreviationText);
+    const dayHigh = createElem("p", "high", `${Math.round(Number(max))}°`);
+    const dayLow = createElem("p", "low", `${Math.round(Number(min))}°`);
+    return [dayAbbreviation, dayHigh, dayLow]
+};
+
+const getDayAbbreviation = (data) => {
+    const dateString = `${data.slice(8)}/${data.slice(5,7)}`;
+    return dateString;
+};
+
+const displayDailyForecast = (dfArray) => {
+    const dayDiv = createElem("div", "forcastDay");
+    dfArray.forEach(el => {
+        dayDiv.appendChild(el);
+    });
+    const dailyForecastContainer = document.getElementById("sixDayForecast__Condition");
+    dailyForecastContainer.appendChild(dayDiv);
 };

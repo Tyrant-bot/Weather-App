@@ -28,6 +28,20 @@ export const getApiCoords = async (text, unit) => {
     }
 }
 
+export const getSixDayWeather = async (text) => {
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${text}&limit=1&appid=${API_key}`;
+    const encodedUrl = encodeURI(url);
+    try{
+        const dataStream = await fetch(encodedUrl);
+        const dataJSON = dataStream.json();
+        return dataJSON;
+    }
+    catch (err) {
+        console.error(err.stack);
+    }
+}
+
+
 export const getWeatherFromCoords = async (locationObj) => {
     const lat = locationObj.getLat();
     const long = locationObj.getLong();
@@ -38,6 +52,22 @@ export const getWeatherFromCoords = async (locationObj) => {
         const weatherStream = await fetch(encodedUrl);
         const weatherJSON = await weatherStream.json();
         return weatherJSON;
+    }
+    catch (err) {
+        console.error(err);
+    }
+}
+
+export const getSixDayWeatherFromCoords = async (locationObj) => {
+    const lat = locationObj.getLat();
+    const long = locationObj.getLong();
+    const unit = locationObj.getUnit();
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,weather_code`;
+    const encodedUrl = encodeURI(url);
+    try{
+        const weatherStream = await fetch(encodedUrl);
+        const sixDayWeatherJSON = await weatherStream.json();
+        return sixDayWeatherJSON;
     }
     catch (err) {
         console.error(err);

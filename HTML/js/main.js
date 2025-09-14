@@ -1,6 +1,6 @@
 import location from "./location.js";
 import { displayErr, displayApiErr, updateDisplay } from "./DOM.js";
-import { setLocationObj, getHomeLocation, getApiCoords, getWeatherFromCoords, cleanText } from "./data.js";
+import { setLocationObj, getHomeLocation, getApiCoords, getWeatherFromCoords, getSixDayWeatherFromCoords, cleanText } from "./data.js";
 
 const currLoc = new location();
 
@@ -117,8 +117,9 @@ const submitLocation = async (event) => {
 
 const updateDisplayWeather = async (locationObj) => {
     const weatherJSON = await getWeatherFromCoords(locationObj);
+    const sixDayWeatherJSON = await getSixDayWeatherFromCoords(locationObj);
     if(weatherJSON){
-        updateDisplay(weatherJSON, locationObj);
+        updateDisplay(weatherJSON, sixDayWeatherJSON, locationObj);
     }
 };
 
