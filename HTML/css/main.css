@@ -6,7 +6,7 @@
 
 html {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/sun.jpg);
+  background-image: url(../sun.jpg);
   background-size: cover;
   background-blend-mode: overlay;
   font-size: 16px;
@@ -355,25 +355,25 @@ main {
 
 .sun {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/sun.jpg);
+  background-image: url(../sun.jpg);
 }
 
 .rain {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/rain.jpg);
+  background-image: url(../rain.jpg);
 }
 
 .cloud {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/cloud.jpg);
+  background-image: url(../cloud.jpg);
 }
 
 .snow {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/snow.jpg);
+  background-image: url(../snow.jpg);
 }
 
 .night {
   background-color: rgba(0, 0, 255, 0.5);
-  background-image: url(../../HTML/night.jpg);
+  background-image: url(../night.jpg);
 }/*# sourceMappingURL=main.css.map */
