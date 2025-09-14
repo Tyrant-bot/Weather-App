@@ -338,7 +338,7 @@ main {
   align-items: center;
   justify-content: space-evenly;
   flex-grow: 1;
-  padding: 0.5rem, 0;
+  padding: 0.5rem 0;
   color: #fff;
 }
 @media only screen and (min-width: 545px) {

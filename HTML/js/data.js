@@ -62,7 +62,10 @@ export const getSixDayWeatherFromCoords = async (locationObj) => {
     const lat = locationObj.getLat();
     const long = locationObj.getLong();
     const unit = locationObj.getUnit();
-    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,weather_code`;
+    let url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,weather_code`;
+    if(unit === "imperial"){
+        url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&daily=temperature_2m_max,temperature_2m_min,weather_code&temperature_unit=fahrenheit`
+    }
     const encodedUrl = encodeURI(url);
     try{
         const weatherStream = await fetch(encodedUrl);

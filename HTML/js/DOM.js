@@ -33,6 +33,8 @@ export const updateDisplay = (weatherJSON, sixDayWeatherJSON, locationObj) => {
 const clearDisplay = () => {
     const currentWeatherConditions = document.getElementById("currentWeather__Conditions");
     deleteContents(currentWeatherConditions);
+    const sixDayForecast = document.getElementById("sixDayForecast__Condition");
+    deleteContents(sixDayForecast);
 };
 
 const deleteContents = (parentElement) => {
@@ -79,7 +81,7 @@ const createCurrentConditionsDiv = (weatherObj, unit) => {
     const tempUnit = unit === "metric" ? "C" : "F";
     const windUnit = unit === "metric" ? "m/s" : "mph";
     const icon = createMainImgDiv(weatherObj.weather[0].icon, weatherObj.weather[0].description);
-    const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.main.temp))}°`);
+    const temp = createElem("div", "temp", `${Math.round(Number(weatherObj.main.temp))}°`, tempUnit);
     const properDesc = toProperCase(weatherObj.weather[0].description);
     const desc = createElem("div", "desc", properDesc);
     const realFeel = createElem("div", "feel", `Real Feel ${Math.round(Number(weatherObj.main.feels_like))}°`);
@@ -192,7 +194,8 @@ const createDailyForecastDivs = (date, max, min, code) => {
     const dayAbbreviation = createElem("p", "dayAbbreaviation", dayAbbreviationText);
     const dayHigh = createElem("p", "high", `${Math.round(Number(max))}°`);
     const dayLow = createElem("p", "low", `${Math.round(Number(min))}°`);
-    return [dayAbbreviation, dayHigh, dayLow]
+    const dayIcon = createDailyForecastIcon(code);
+    return [dayAbbreviation, dayIcon, dayHigh, dayLow]
 };
 
 const getDayAbbreviation = (data) => {
@@ -200,8 +203,34 @@ const getDayAbbreviation = (data) => {
     return dateString;
 };
 
+const createDailyForecastIcon = (code) => {
+    const icon = document.createElement("i");
+    if(code === 1 || code === 2 || code === 3){
+        icon.classList.add("fa-solid", "fa-cloud-sun");
+    }
+    else if(code === 51 || code === 53 || code === 55){
+        icon.classList.add("fa-solid", "fa-cloud-sun-rain");
+    }
+    else if(code === 61 || code === 63 || code === 65 || code === 80 || code === 81 || code === 82){
+        icon.classList.add("fa-solid", "fa-cloud-rain");
+    }
+    else if(code === 71 || code === 73 || code === 75 || code === 85 || code === 86){
+        icon.classList.add("fa-solid", "fa-snowflake");
+    }
+    else if(code === 95 || code === 96 || code === 99){
+        icon.classList.add("fa-solid", "fa-cloud-bolt");
+    }
+    else if(code === 45 || code === 48){
+        icon.classList.add("fa-solid", "fa-smog");
+    }
+    else {
+        icon.classList.add("fa-solid", "fa-sun");
+    }
+    return icon;
+}
+
 const displayDailyForecast = (dfArray) => {
-    const dayDiv = createElem("div", "forcastDay");
+    const dayDiv = createElem("div", "day");
     dfArray.forEach(el => {
         dayDiv.appendChild(el);
     });
